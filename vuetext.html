@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        body{
+        	height: 4000px;
+        }
+			.red{
+				background-color: red;
+				width: 100px;
+				height: 100px;
+			}
+			.pink{
+				/* background-color: pink; */
+				/* width: 100px;
+				height: 100px; */
+				border-radius:50%;
+			}
+			.classA{
+				width: 200px;
+				height: 200px;
+				background-color: #c40;
+			}
+			.inputGroup{
+				width: 300px;
+				height: 40px;
+
+				border:1px solid #ccc;
+				margin-bottom: 5px;
+			}
+
+        </style>
+        <script src="js/vue.js"></script>
+    </head>
+    <body>
+    <div id="demo">
+    	<p v-if="male">male</p>
+    	<p v-else>famle</p>
+    	<p v-text="age>25?25:20">{{age}}</p>
+    	<p :class="{red:isTrue,pink:isTrue}"></p>
+    	<!-- <p v-style='mystyle'>hello</p> -->
+    	<p v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">faf</p>
+    	<p :style="styleObject">adad</p>
+    	<p :style="moreStyle">dqadf</p>
+    	<div class="inputGroups">
+    		<div class="inputGroup">
+    			<input type="text" v-model='message' placeholder='edit'>
+    			<span>{{message}}</span>
+    		</div>
+    		<div class="inputGroup">
+    		text:
+    			<textarea type="text" v-model='message' placeholder='edit'></textarea>
+    			<span>{{message}}</span>
+    		</div> 
+    		<div class="inputGroup">
+    		checkbox:
+    			<input type="checkbox" id="checkbox" v-model='checked'>
+    			<label for="checkbox" :class='{red:checked}'>{{checked}}</label>
+    		</div>  
+    		<div class="inputGroup">
+    		checkbox:
+    			<input type="checkbox" id="jack" value="Jack" v-model='checkedNames'>
+    			<label for="jack">jack</label>
+    			<input type="checkbox" id="John" value="John" v-model='checkedNames'>
+    			<label for="John">John</label>
+    			<input type="checkbox" id="Mike" value="Mike" v-model='checkedNames'>
+    			<label for="Mike">Mike</label>    			    			
+    			<br>
+    			<span>checked name:{{checkedNames | json}}</span>
+    		</div>  
+    		<div class="inputGroup">
+    		radio:
+    			<input type="radio" id="one" value="one" v-model='picked'>
+    			<label for="one">one</label>
+    			<input type="radio" id="two" value="two" v-model='picked'>
+    			<label for="two">two</label>
+    			<input type="radio" id="three" value="three" v-model='picked'>
+    			<label for="three">three</label>
+    			<br>
+    			<span>Picked:{{picked}}</span>
+    		</div>  
+    		<div class="inputGroup">
+    		select:
+    			<select name="" id="" v-model='selected'>
+    				<option selected>a</option>
+    				<option>b</option>
+    				<option>c</option>
+    			</select>
+    			<span>Selected:{{selected}}</span>
+    		</div>   
+    		<div class="inputGroup">
+    		select动态渲染:
+    			<select name="" id="" v-model='selected'>
+    				<option v-for="select in selects" :value='select.value'>{{select.text}}</option>
+    			</select>
+    			<span>Selected:{{selected}}</span>
+    		</div>      		  		    		    		    		    		
+    	</div>
+
+    </div>1
+    
+    <script>
+    var vm = new Vue({
+    	el:'#demo',
+    	data:{
+    		male:false,
+    		age:30,
+    		isTrue:true,
+    		activeColor:'red',
+    		fontSize:30,
+    		styleObject:{
+    			color:'red',
+    			fontSize:'40px'
+    		},
+    		moreStyle:{
+    			color:'pink',
+    			fontSize:'50px',
+    			height:'100px',
+    			width:'100px'
+    		},
+    		message:"hello",
+   			checkedNames:[],
+   			picked:"one",
+   			selected:"a",
+   			selects:[
+   				{text:'A' , value:'1'},
+   				{text:'B' , value:'2'},
+   				{text:'C' , value:'3'},
+   			]
+    		
+
+    		
+    	}
+    })
+    </script>
+    </body>
+</html>

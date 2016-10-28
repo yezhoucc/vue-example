@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>text</title>
+        <script src="js/vue.js"></script>
+    </head>
+    <body>
+    	<!-- <span v-text='message | reverse'></span> -->
+    	{{msg | uppercase}}
+
+    	<ul>
+    		<li v-for="product in products">
+    			{{ product.name | capitalize }} - {{ product.price | discount 25 | currency}}
+    		</li>
+    	</ul>
+    	<script>
+ 			// Vue.filter('reverse',function  (value) {
+ 			// 	console.log(value)
+ 			// 	return value.split('').reverse().join('')
+ 			// })
+ 			Vue.filter("discount",function(value,discount) {
+ 				return value * (discount / 100);
+ 			});
+ 			var vm = new Vue({
+ 				el:'body',
+ 				data:{
+ 					msg:'abgc',
+ 					products : [
+                    	{name: 'microphone', price: 25, category: 'electronics'},
+                    	{name: 'laptop case', price: 15, category: 'accessories'},
+                    	{name: 'screen cleaner', price: 17, category: 'accessories'},
+                    	{name: 'laptop charger', price: 70, category: 'electronics'},
+                    	{name: 'mouse', price: 40, category: 'electronics'},
+                    	{name: 'earphones', price: 20, category: 'electronics'},
+                    	{name: 'monitor', price: 120, category: 'electronics'}
+              		]
+ 				}
+ 			})
+    	</script>
+    </body>
+</html>

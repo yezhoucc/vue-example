@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div class="leftToright" v-if='baseType==1'>
+   		<div class="left" id='base'>
+   			<div class="name">
+   				<b>待选项</b>
+   				<a href="javascript:;" @click='addAllRight(baseKey)'>全选</a>
+   			</div>
+   			<ul>
+   				<li v-for='data1 in baseData' :class="parentnoAllow(baseKey,data1.value,data1.childList.length)">
+   					<div class="item-name" @click='toggleSlide($event)'>
+   						<i class="icon-close"></i> <span>{{data1.name}}</span>
+   						<a href="javascript:;" @click.stop='addParentRight($event,data1,baseKey)'></a>
+   					</div>
+   					<div class="item-value">
+   						<p v-for='data2 in data1.childList' :class="childnoAllow(baseKey,data1.value,data2.value)">
+   							<span>{{data2.name}}</span>
+   							<a href="javascript:;" @click.stop='addChildRight($event,data1,data2,baseKey)'></a>
+   						</p>
+   					</div>
+   				</li>
+   			</ul>
+   		</div>
+   		<span class="arrow"></span>
+   		<div class="right">
+   			<div class="name"><b>已选项</b>({{selectNum.base}}项) <a href="javascript:;" @click='removeAllRight("base","base")'>清空</a></div>
+   			<ul>
+   				<li v-for='(idx1,data1) in base' >
+   					<div class="item-name" @click='toggleSlide($event)'>
+   						<i class="icon-close"></i> <span>{{data1.name}}</span>
+   						<a  href="javascript:;" @click.stop='removeParentRight(idx1,data1,baseKey)'></a>
+   					</div>
+   					<div class="item-value">
+   						<p v-for='(idx2,data2) in data1.childList'>
+   							<span>{{data2.name}}</span>
+   							<a  href="javascript:;" @click.stop='removeChildRight(idx1,idx2,data2.id,data1,baseKey)'></a>
+   						</p>
+   					</div>
+   				</li>
+			</ul>
+		</div>
+	</div>
+    </body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        ul{
+        	padding: 0;
+        	margin: 0;
+        	list-style:none;
+        }
+			li{
+				width: 300px;
+				height: 40px;
+				line-height: 40px;
+				background-color: lightblue;
+				margin-bottom: 5px;
+				/* position:absolute; */
+			}
+			.list{
+				width: 300px;
+				height: 40px;
+				border:1px solid #ccc;
+				margin-bottom: 5px;
+				position:relative;
+			}
+			.todoList{
+				margin-top: 30px;
+				width: 400px;
+				height: 300px;
+				border:1px solid #ccc;
+				/* text-align: center; */
+				position:relative;
+			}
+			.todoList ul{
+				/* margin:0 auto; */
+				position:absolute;
+				left: 50%;
+				margin-left: -154px;
+				margin-top:80px;
+			}
+			.todoList .new{
+				width: 300px;
+				height: 40px;
+				margin:20px 0 20px 0;
+				font-size:25px;
+				position:absolute;
+				/* top: 20px; */
+				left: 46px;
+			}
+			.list input{
+				text-align:left;
+			}
+			.todone{
+				text-decoration:line-through;
+			}
+			input[type="button"]{
+				position:absolute;
+				right:10px;
+				top: 10px;
+				-webkit-appearance:none;
+			    -webkit-font-smoothing: antialiased;
+			    outline-style:none;
+			    border:none;
+			    background-color: transparent;
+			}
+        </style>
+        <script src="js/vue.js"></script>
+    </head>
+    <body>
+    <div id="demo">
+    	<ul>
+			<li v-for="item in items" v-on:click='toggle(item)' v-show='item.done'>
+				{{item.text}}
+			</li>
+		</ul>
+		<!-- 组织默认行为 -->
+		<div class="inputGroup">
+			<button v-on:click="say('hello',$event)">submit</button>
+		</div>
+		<!-- 事件修饰符 -->
+		<div class="extra">
+		<!-- .stop阻止事件冒泡，.stop.prevent阻止默认行为 -->
+			<a href="http://wwww.baidu.com" v-on:click.stop.prevent="doThis('hi')">百度一下</a>
+		</div>
+		<!-- 按键修饰符 -->
+		<div class="todoList">
+			<input class="new" v-on:keyup.enter="submit" v-model='newTodo'>
+			<ul>						
+				<li v-for="todo in todos" class="list" :key="todo.id" :class="{todone:todo.todone}">
+					<input type="checkbox" v-model='todo.todone'>
+					<label for="">{{todo.learning}}</label>
+					<input type="button" value="X" v-on:click="deleteList(todo)">
+				</li>
+			</ul>
+			
+		</div>
+		
+		
+    </div>
+		
+		<script>
+ 			var vm = new Vue({
+ 				el:'#demo',
+ 				data:{
+ 					items:[
+ 						{text:'hello',done:true},
+ 						{text:'world',done:true}
+ 					],
+ 					todos:[
+ 						{learning :'语法',id:1},
+ 						{learning :'指令',id:2},
+ 						{learning :'事件',id:3},
+ 					],
+ 					newTodo:''
+ 				},
+ 				methods:{
+ 					toggle:function  (item) {
+ 						console.log(item)
+ 						item.done = !item.done
+ 					},
+ 					say:function  ( msg,event) {
+ 						event.preventDefault()
+ 					},
+ 					doThis:function function_name (msg) {
+ 						alert(msg);
+ 					},
+ 					submit:function  () {
+ 						// body...
+ 						
+ 						this.todos.push({learning:this.newTodo.trim()});
+ 							this.newTodo=''
+ 						
+ 					},
+ 					deleteList:function  (todo) {
+ 						this.todos.splice(todo,1)
+ 					}
+ 				}
+ 			})
+		</script>
+    </body>
+</html>
